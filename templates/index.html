@@ -1,0 +1,39 @@
+{% extends 'base2.html' %}
+{% block title %}
+<title>Home</title>
+{% endblock %}
+{% block body %}
+
+<!--content-->
+
+<div class="content">
+    <h2>Weekly Updates</h2>
+    <div class="newstand">
+        {%for data in data.items%}
+        
+            <div class="news">
+                <div class="text">
+                    <h3> <a href="/news/{{data.title}}" class="newtitle"> {{data.title|safe}}</a></h3>
+                    <p class="desc">{{data.desc}}</p>
+                    <p class="posted_time" transform: skewX(-10deg);>Posted on: {{data.date}}</p>
+                </div>
+                {% if data.imgholder != "" %}
+                <div class="image">
+                    <img src="{{ url_for('static', filename=data.imgholder) }}">
+                </div>
+                {% endif %}
+            </div>
+        {%endfor%}
+    </div>
+    <div class="control">
+        {% if data.has_prev %}<a href="{{ url_for('home',page = data.prev_num) }}"> <button
+                class="btn btn-primary">&larr; Previous Page </button></a>{% else %} <button class="btn btn-primary"
+            disabled>&larr; Previous Page</button>{%
+        endif %}
+        {% if data.has_next %}<a href="{{ url_for('home',page = data.next_num) }}"><button class="btn btn-primary">
+                Next Page &rarr;
+            </button> </a>{% else %}<button class="btn btn-primary" disabled>Next Page &rarr;</button> {% endif %}
+    </div>
+</div>
+{{a}}
+{% endblock %}

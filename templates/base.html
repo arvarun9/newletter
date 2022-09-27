@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <!--google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Martel:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  {% block title%} {%endblock%}
+</head>
+
+<body>
+  <!-- wrong name given it is a desktop navbar actually-->
+  <div id="mob_nav">
+    <div class="header">
+      <a href="/">
+        <h1>The Living Journal</h1>
+      </a>
+    </div>
+    <ul class="nav nav-tabs" style="background-color: rgb(238 238 238);">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          aria-expanded="false">Category</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/Category/Sports">Sports</a>
+          <a class="dropdown-item" href="/Category/Entertainment">Entertainment</a>
+          <a class="dropdown-item" href="/Category/WorldWide">World Wide</a>
+          <a class="dropdown-item" href="/Category/Politics">Politics</a>
+          <a class="dropdown-item" href="/Category/Education">Education</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+    </ul>
+  </div>
+
+  <!--Desktop navbar-->
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">
+      <h1>The Living Journal</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Category
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLin">
+            <a class="dropdown-item" href="/Category/Sports">Sports</a>
+            <a class="dropdown-item" href="/Category/Entertainment">Entertainment</a>
+            <a class="dropdown-item" href="/Category/WorldWide">World Wide</a>
+            <a class="dropdown-item" href="/Category/Politics">Politics</a>
+            <a class="dropdown-item" href="/Category/Education">Education</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  {% block body %} {% endblock %}
+  <footer>
+    This website is created for educational purpose only.
+  </footer>
+</body>
+
+</html>

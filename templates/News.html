@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if webtitle == "Other" %}
+<title>News</title>
+{% else %}
+<title>{{webtitle}} | News</title>
+{% endif %}
+{% endblock title %}
+{% block body %}
+{% if webtitle == "Other" %}
+<div class="maincontainer">
+    <div class="newstand1">
+        <div class="Currentnews" style="border-radius: 5px;padding: 10px 5px;">
+            <h1> {{currentdata.title}}</h1>
+            {% if currentdata.imgholder != "" %}
+            <div class="imageholder">
+                <img src="{{ url_for('static', filename=currentdata.imgholder) }}">
+            </div>
+            {% endif %}
+            <br>
+            <div class="newstext">
+                {{currentdata.content|safe}}
+            </div>
+            <p class="posted_time" style="text-align: end;">Posted on: {{currentdata.date}}</p>
+            
+        </div>
+    </div>
+    <br>
+    <div class="newstand2">
+        <h2>{{webtitle}} Updates</h2>
+        {%for data in data.items %}
+        {% if data != currentdata %}
+        <div class="news">
+            <div class="text">
+                <!-- if webtitle is defined like sports etc then other updates will be related to that category -->
+                <h3> <a href="/Category/{{data.category}}/{{data.title}}" class="newtitle"> {{data.title}}</a></h3>
+                <p class="desc">{{data.desc}}</p>
+                <p class="posted_time" transform: skewX(-10deg);>Posted on: {{data.date}}</p>
+            </div>
+            {% if data.imgholder != "" %}
+            <div class="image">
+                <img src="{{ url_for('static', filename=data.imgholder) }}">
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        {%endfor%}
+    </div>
+</div>
+<!--if not its other-->
+{% else %}
+<div class="maincontainer" id="maincontainer">
+    <div class="newstand1" id="newstand1">
+        <div class="Currentnews" style="border-radius: 5px;padding: 10px 5px;">
+            <h1> {{currentdata.title}}</h1>
+            {% if currentdata.imgholder != "" %}
+            <div class="imageholder">
+                <img src="{{ url_for('static', filename=currentdata.imgholder) }}">
+            </div>
+            {% endif %}
+            <br>
+            <div class="newstext">
+                {{currentdata.content|safe}}
+            </div>
+            <p class="posted_time" style="text-align: end;">Posted on: {{currentdata.date}}</p>
+        </div>
+    </div>
+    <div id="aside">
+        <h2 style="padding: .6rem;border-bottom: 1px solid grey;" id="to_be_fixed">Other Updates</h2>
+        <div class="headlines">
+        {% for news in other_news %}
+        {%  if news.category != currentdata.category %}
+        <h6><a href="/news/{{news.title}}">{{news.title}}</a> </h6>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    <br>
+    <div class="newstand2" id="newstand2">
+        <h2>More News Related To {{webtitle}}</h2>
+        {%for data in data.items %}
+        {% if data != currentdata %}
+        <div class="news">
+            <div class="text">
+                <!-- if webtitle is defined like sports etc then other updates will be related to that category -->
+                <h3> <a href="/Category/{{data.category}}/{{data.title}}" class="newtitle"> {{data.title}}</a></h3>
+                <p class="desc">{{data.desc}}</p>
+                <p class="posted_time" transform: skewX(-10deg);>Posted on: {{data.date}}</p>
+            </div>
+            {% if data.imgholder != "" %}
+            <div class="image">
+                <img src="{{ url_for('static', filename=data.imgholder) }}">
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        {%endfor%}
+    </div>
+</div>
+<script>
+</script>
+{% endif %}
+
+{% endblock %}
